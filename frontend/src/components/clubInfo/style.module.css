@@ -1,0 +1,39 @@
+.clubInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 16px;
+  border-radius: 8px;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stats {
+  display: flex;
+  gap: 20px;
+  text-transform: uppercase;
+
+  margin-left: 80px;
+}
+
+.clubLogo {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.clubDetails {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.lastMatch {
+  margin-top: 10px;
+}

@@ -1,0 +1,40 @@
+/* PlayerHero.module.css */
+
+.hero {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  background-color: #f4f4f4;
+  width: 100%;
+  height: 60vh;
+  border-radius: 25px;
+  gap: 60px;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.playerInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icons {
+  display: flex;
+}
+
+/* Right container */
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 40%;
+  align-items: center;
+}
+
+/* Add more styling as needed */

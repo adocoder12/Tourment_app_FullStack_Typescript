@@ -1,0 +1,135 @@
+.formContainer {
+  display: grid;
+  place-items: center;
+  gap: 20px;
+}
+.upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 600px;
+  /* border: 1px solid #333; */
+}
+
+/* form */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 600px;
+  width: 100%;
+  border-radius: 20px;
+  position: relative;
+  background-color: transparent;
+  color: #fff;
+  /* border: 1px solid #333; */
+}
+
+/* label wrapper */
+.labelWrapper {
+  display: flex;
+  gap: 14px;
+  max-width: 600px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 20px;
+  position: relative;
+  background-color: transparent;
+  color: #fff;
+
+  flex-shrink: 0;
+}
+
+/* Ttile */
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  padding-left: 30px;
+  color: #dffe2e;
+}
+
+/* MEssage */
+
+.signin {
+  font-size: 14.5px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.signin {
+  text-align: center;
+}
+
+.signin a:hover {
+  text-decoration: underline royalblue;
+}
+
+.signin a {
+  color: #dffe2e;
+}
+
+.form label {
+  position: relative;
+  flex-basis: 50%;
+}
+
+.form label .input {
+  background-color: #333;
+  color: #fff;
+  width: 100%;
+  padding: 20px 05px 05px 10px;
+  outline: 0;
+  border: 1px solid rgba(105, 105, 105, 0.397);
+  border-radius: 10px;
+}
+
+.form label .input + span {
+  color: rgba(255, 255, 255, 0.7);
+  position: absolute;
+  left: 10px;
+  top: 0px;
+  font-size: 0.9em;
+  cursor: text;
+  transition: 0.3s ease;
+}
+
+.form label .input:placeholdershown + span {
+  top: 12.5px;
+  font-size: 0.9em;
+}
+
+.form label .input:focus + span,
+.form label .input:valid + span {
+  color: #dffe2e;
+  top: 0px;
+  font-size: 0.7em;
+  font-weight: 600;
+}
+
+span {
+  text-transform: uppercase;
+}
+
+.input {
+  font-size: medium;
+}
+
+.submit {
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 10px;
+  color: #000;
+  font-size: 16px;
+  transform: 0.3s ease;
+  background-color: #2cf5c5;
+}
+
+.submit:hover {
+  background-color: rgb(223, 254, 46);
+}

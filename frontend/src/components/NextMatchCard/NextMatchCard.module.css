@@ -1,0 +1,58 @@
+/* NextMatchCard.module.css */
+
+.nextMatchCard {
+  display: grid;
+  gap: 16px;
+  background-color: inherit;
+  padding: 16px;
+  border-radius: 8px;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.matchDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.teams {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 8px;
+}
+
+.team {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 8px;
+}
+
+.scores {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.vs {
+  font-size: 16px;
+  color: #4d5358;
+}
+
+.schedule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.date,
+.time {
+  font-size: 14px;
+  color: #4d5358;
+  margin-bottom: 4px;
+}
+
+/* Add more styling as needed */

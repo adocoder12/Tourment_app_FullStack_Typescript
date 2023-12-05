@@ -1,0 +1,57 @@
+/* PlayerStandings.module.css */
+
+.container {
+  background-color: #fff;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  width: 100%;
+}
+
+h2 {
+  color: #333;
+}
+
+.scrollContainer {
+  max-height: 400px; /* Adjust the max height as needed */
+  overflow-y: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+tr {
+  cursor: pointer;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+tr:hover {
+  background-color: #f9f9f9;
+}
+
+.playerAvatar {
+  width: 30px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.playerInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

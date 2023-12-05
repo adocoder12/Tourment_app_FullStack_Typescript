@@ -1,0 +1,139 @@
+details {
+  position: relative;
+  flex-basis: 50%;
+}
+
+details[open] {
+  z-index: 1;
+}
+
+summary {
+  padding: 0.8rem;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #ddd;
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+details[open] summary:before {
+  content: "";
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+summary:after {
+  content: "";
+  display: inline-block;
+  float: right;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-bottom: 1px solid currentColor;
+  border-left: 1px solid currentColor;
+  border-bottom-left-radius: 2px;
+  transform: rotate(45deg) translate(50%, 0%);
+  transform-origin: center center;
+  transition: transform ease-in-out 100ms;
+}
+
+summary:focus {
+  outline: none;
+}
+
+details[open] summary:after {
+  transform: rotate(-45deg) translate(0%, 0%);
+}
+
+.list {
+  display: grid;
+  justify-content: center;
+  width: 100%;
+  background: #ddd;
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  padding: 1rem;
+  border-radius: 5px;
+  max-height: 170px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.itemList {
+  margin: 0;
+  padding: 1rem 0;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  width: 100%;
+}
+
+.itemList:first-child {
+  padding-top: 0;
+}
+
+.itemList:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+/* FAKE SELECT */
+
+summary.radios {
+  counter-reset: radios;
+}
+
+summary.radios:before {
+  content: var(--selection);
+}
+
+.inputItem[type="radio"] {
+  counter-increment: radios;
+  appearance: none;
+  display: none;
+}
+
+.inputItem[type="radio"]:checked {
+  display: inline;
+  --display: block;
+}
+
+.inputItem[type="radio"]:after {
+  content: attr(title);
+  display: inline;
+  font-size: 1rem;
+  text-transform: capitalize;
+}
+
+.list {
+  counter-reset: labels;
+}
+
+.label {
+  width: 100%;
+  display: flex;
+  cursor: pointer;
+  justify-content: space-between;
+  color: #000;
+  text-transform: capitalize;
+}
+
+.label:hover {
+  scale: 1.1;
+  background-color: #72727210;
+}
+
+.label .span {
+  --display: none;
+  display: var(--display);
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid #727272;
+  border-radius: 3px;
+}

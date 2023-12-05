@@ -1,0 +1,52 @@
+.TeamsListContainer {
+  display: grid;
+  flex-direction: column;
+  padding: 16px;
+  width: 100%;
+}
+
+.categoryContainer {
+  padding: 16px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: #fff; /* Choose your desired color */
+  text-transform: uppercase;
+}
+.teamsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 200px));
+  gap: 16px;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.teamsItem {
+  background-color: #f5f5f5;
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.teamLogo {
+  width: 100px; /* Adjust the size as needed */
+  height: 100px; /* Adjust the size as needed */
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 8px;
+}
+
+.teamName {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.angleIcon {
+  color: #007bff; /* Choose your desired color */
+}
