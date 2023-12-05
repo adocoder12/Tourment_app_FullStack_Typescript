@@ -1,6 +1,36 @@
 import { ITeam } from "@/utils/interfaces/team";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+//get team by name
+
+const getTeamByName = createAsyncThunk(
+  "user/teams/getTeamByName",
+  async (name: string, { rejectWithValue }) => {
+    if (!name) {
+      console.log("name is required");
+      return rejectWithValue("name is required");
+    }
+    const response = await fetch(
+      `http://localhost:8080/api/v1/teams/getTeamByName/${name}`
+    );
+    const data = await response.json();
+    console.log("data as", data);
+
+    if (response.ok) {
+      const team: ITeam = data.team;
+      const message: string = data.message;
+
+      return {
+        team: team,
+        message: message,
+      };
+    }
+    return rejectWithValue(data.error);
+  }
+);
+
+//get team by id
+
 const getTeam = createAsyncThunk(
   "user/teams/getTeam",
   async (id: string, { rejectWithValue }) => {
@@ -115,4 +145,4 @@ const deleteTeam = createAsyncThunk(
     return rejectWithValue(data.error.error.message);
   }
 );
-export { createTeam, getTeams, updateTeam, deleteTeam, getTeam };
+export { createTeam, getTeams, updateTeam, deleteTeam, getTeam, getTeamByName };

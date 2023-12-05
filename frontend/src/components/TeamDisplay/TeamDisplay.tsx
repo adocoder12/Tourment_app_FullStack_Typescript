@@ -9,13 +9,13 @@ import style from "./style.module.css";
 
 //redux
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
-import { getTeam } from "@/redux/services/team";
+import { getTeamByName } from "@/redux/services/team";
 import { getPlayer } from "@/redux/services/player";
 
 //interfaces
 
 export default function TeamDisplay() {
-  const { id } = useParams();
+  const { name } = useParams();
   const [playerId, setPlayerId] = useState<string>("");
   const dispatch = useAppDispatch();
 
@@ -28,8 +28,8 @@ export default function TeamDisplay() {
 
   //get id param team
   useEffect(() => {
-    dispatch(getTeam(id as string));
-  }, [dispatch, id]);
+    dispatch(getTeamByName(name as string));
+  }, [dispatch, name]);
 
   // get user player selected
   useEffect(() => {

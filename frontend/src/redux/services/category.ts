@@ -11,10 +11,10 @@ const getCategories = createAsyncThunk(
       "http://localhost:8080/api/v1/categories/getCategories"
     );
     const data = await response.json();
-    console.log("data", data);
 
     if (response.ok) {
       const categories: Icategory[] = data;
+      console.log("categories", categories);
       return {
         categories: categories,
       };
@@ -37,7 +37,6 @@ const createCategory = createAsyncThunk(
       }
     );
     const data = await response.json();
-    console.log("data", data);
 
     if (response.ok) {
       const category: Icategory = data.category;

@@ -10,6 +10,7 @@ import {
   updateTeam,
   deleteTeam,
   getTeam,
+  getTeamByName,
 } from "@redux/services/team";
 
 interface initialState {
@@ -60,7 +61,20 @@ const teamSlice = createSlice({
         state.error = action.payload as string;
         state.teams = undefined;
       })
-      //add getTeam
+      //getTeam by name
+      .addCase(getTeamByName.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getTeamByName.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.team = payload?.team as ITeam;
+      })
+      .addCase(getTeamByName.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+        state.team = undefined;
+      })
+
       //getTeam
       .addCase(getTeam.pending, (state) => {
         state.loading = true;

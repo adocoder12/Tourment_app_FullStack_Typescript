@@ -7,6 +7,32 @@ import CustomError from "../../classes/CustomError";
 import DbMessageResponse from "../../interfaces/DbResponse";
 
 /*========== get categories controller ==============*/
+const getCategory = async (req: Request, res: Response, next: NextFunction) => {
+  const categoryId = req.params.id;
+
+  if (!categoryId) {
+    next(new CustomError("Missing category id", 400));
+    return;
+  }
+
+  try {
+    const category = await Category.findById(categoryId).populate("teams");
+
+    if (!category) {
+      next(new CustomError("Category not found", 404));
+      return;
+    }
+
+    const response: DbMessageResponse = {
+      message: "Category found",
+      category: category,
+    };
+
+    res.status(200).json(response);
+  } catch (error: string | CustomError | any) {
+    next(new CustomError(error.message || "Get category error", 400));
+  }
+};
 const getCategories = async (
   req: Request,
   res: Response,
@@ -129,4 +155,10 @@ const deleteCategory = async (
   }
 };
 
-export { createCategory, getCategories, updateCategory, deleteCategory };
+export {
+  createCategory,
+  getCategories,
+  updateCategory,
+  deleteCategory,
+  getCategory,
+};

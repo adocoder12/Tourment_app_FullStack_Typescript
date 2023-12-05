@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 //interfaces
 import { Icategory } from "@/utils/interfaces/category";
+
 import { getCategories } from "../services/category";
 
 export interface categoryState {
@@ -28,7 +29,7 @@ const categorySlicer = createSlice({
       })
       .addCase(getCategories.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.categories = payload?.categories as Icategory[];
+        state.categories = payload.categories as Icategory[];
       })
       .addCase(getCategories.rejected, (state, action) => {
         state.loading = false;

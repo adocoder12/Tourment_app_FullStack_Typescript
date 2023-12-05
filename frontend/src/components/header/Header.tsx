@@ -52,7 +52,7 @@ export default function Header({ user }: Props) {
         <nav className={style.navBar}>
           {user && <Avatar alt="UserPic" width="70" height="70" />}
           <div className={style.logo}>
-            <NavLink to="/">Brand</NavLink>
+            <NavLink to={"/"}>Brand</NavLink>
           </div>
           <FaBars
             size={30}
@@ -72,30 +72,38 @@ export default function Header({ user }: Props) {
                 {user ? (
                   <>
                     <li className={style.userList}>
-                      <NavLink to={`/teams/allTeams`}>Teams</NavLink>
+                      <NavLink to="/teams/allTeams">Teams</NavLink>
                     </li>
                     <li className={style.userList}>
-                      <NavLink to={`/myTeam/${user.myTeam}`}>
+                      <NavLink to={`${user.username}/myTeam/${user.myTeam}`}>
                         my Team{" "}
                         <FaAngleLeft size={12} className={style.angleIcon} />
                       </NavLink>
 
                       <ul className={style.submenu}>
                         <li className={style.submenuList}>
-                          <NavLink to={`/myTeam/${user.myTeam}/createTeam`}>
+                          <NavLink
+                            to={`${user.username}/myTeam/${user.myTeam}/createTeam`}
+                          >
                             create Team
                           </NavLink>
                         </li>
                         <li className={style.submenuList}>
-                          <NavLink to="/team/updateTeam">Update Team</NavLink>
+                          <NavLink to={`${user.username}/team/updateTeam`}>
+                            Update Team
+                          </NavLink>
                         </li>
                         <li className={style.submenuList}>
-                          <NavLink to="/team/delete">Delete Team</NavLink>
+                          <NavLink to={`${user.username}/team/delete`}>
+                            Delete Team
+                          </NavLink>
                         </li>
                         {/* Players links */}
                         <li className={style.submenuSecondary}>
                           <li className={style.subUserList}>
-                            <NavLink to={`/myTeam/${user.myTeam}/players`}>
+                            <NavLink
+                              to={`${user.username}/myTeam/${user.myTeam}/players`}
+                            >
                               Players{" "}
                               <FaAngleLeft
                                 size={12}
@@ -106,13 +114,15 @@ export default function Header({ user }: Props) {
                           <ul className={style.subUserList}>
                             <li className={style.submenuSecondaryList}>
                               <NavLink
-                                to={`/myTeam/${user.myTeam}/players/createPlayer`}
+                                to={`${user.username}/myTeam/${user.myTeam}/players/createPlayer`}
                               >
                                 create Player
                               </NavLink>
                             </li>
                             <li className={style.submenuSecondaryList}>
-                              <NavLink to="/player/updatePlayer">
+                              <NavLink
+                                to={`${user.username}/player/updatePlayer`}
+                              >
                                 Update Player
                               </NavLink>
                             </li>

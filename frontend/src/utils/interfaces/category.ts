@@ -3,6 +3,6 @@ import { ITeam } from "./team";
 export interface Icategory {
   id: string;
   name: string;
-  teams?: ITeam[];
+  teams: ITeam[];
   createdAt?: Date;
 }

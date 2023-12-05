@@ -14,23 +14,6 @@ interface Props {
 }
 
 const TeamStandings = ({ teams }: Props) => {
-  // Replace this data with your actual team data
-
-  // const teamData = [
-  //   // ... (your team data)
-  //   {
-  //     id: 1,
-  //     name: "Team A",
-  //     played: 3,
-  //     won: 2,
-  //     drawn: 1,
-  //     lost: 0,
-  //     goalsFor: 5,
-  //     goalsAgainst: 2,
-  //     points: 7,
-  //   },
-  // ];
-
   const tableHeaders = [
     "Team",
     "Played",
@@ -64,7 +47,7 @@ const TeamStandings = ({ teams }: Props) => {
                       width="50"
                       height="50"
                       src={`${team.badge}`}
-                      path={`/teams/${team._id}`}
+                      path={`/teams/${team.name}`}
                     />
                     {team.name}
                   </td>

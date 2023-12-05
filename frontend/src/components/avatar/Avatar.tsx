@@ -43,9 +43,7 @@ export default function Avatar({
         console.error("Error fetching image:", error);
       }
     })();
-  }, []);
-
-  console.log("img " + imageUrl);
+  }, [src]);
   return (
     <>
       <a href={path ? path : "#"}>

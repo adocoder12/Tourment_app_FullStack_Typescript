@@ -42,7 +42,7 @@ function App() {
                 element={!token ? <RegisterPage /> : <Navigate to="/" />}
               />
               <Route
-                path="/myTeam/*"
+                path=":username/myTeam/*"
                 element={token ? <MyTeamPage /> : <Navigate to="/" />}
               />
               <Route path="/teams/*" index element={<TeamsPage />} />
