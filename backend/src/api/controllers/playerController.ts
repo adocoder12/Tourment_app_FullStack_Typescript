@@ -53,16 +53,21 @@ const getPlayer = async (req: Request, res: Response, next: NextFunction) => {
 /*========== add controller ==============*/
 
 const addPlayer = async (req: Request, res: Response, next: NextFunction) => {
-  console.log("addPlayer controller: ", req.body.age);
-
-  // Check for missing fields
-
+  console.log("addPlayer controller: ", req.body);
+  const logoPath = req.file?.path;
   const updateFields = req.body;
+  console.log("updateFields", updateFields);
+
+  if (!logoPath) {
+    next(new CustomError("Upload player Picture", 400));
+    return;
+  }
 
   if (updateFields === undefined || !updateFields) {
     next(new CustomError("Missing fields", 400));
     return;
   }
+  console.log("updateFields", updateFields);
 
   const updateObject: Record<string, any> = {};
   for (const key in updateFields) {
@@ -71,6 +76,7 @@ const addPlayer = async (req: Request, res: Response, next: NextFunction) => {
 
   try {
     const team: ITeam = await Team.findById(updateObject.teamId);
+    console.log("team", team);
 
     const player_email_Exist = await Player.findOne({
       email: updateObject.email,
@@ -117,6 +123,7 @@ const addPlayer = async (req: Request, res: Response, next: NextFunction) => {
       gender: updateObject.gender,
       category: team.categoryName,
       age: updateObject.age,
+      picture: logoPath,
     });
 
     // Add player to team

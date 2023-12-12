@@ -76,8 +76,8 @@ const createTeam = createAsyncThunk(
       body: formData,
     });
     const data = await response.json();
-    if (response.ok) {
-      return rejectWithValue(data.error.error.message);
+    if (!response.ok) {
+      return rejectWithValue(data.error.message);
     }
     const team: ITeam[] = data.team;
     const message: string = data.message;

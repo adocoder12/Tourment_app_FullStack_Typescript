@@ -78,7 +78,6 @@ export default function Header({ user }: Props) {
                         my Team{" "}
                         <FaAngleLeft size={12} className={style.angleIcon} />
                       </NavLink>
-
                       <ul className={style.submenu}>
                         <li className={style.submenuList}>
                           <NavLink
@@ -92,25 +91,17 @@ export default function Header({ user }: Props) {
                             Update Team
                           </NavLink>
                         </li>
-                        <li className={style.submenuList}>
-                          <NavLink to={`${user.username}/team/delete`}>
-                            Delete Team
+                        <li className={style.subUserList}>
+                          <NavLink
+                            to={`${user.username}/myTeam/${user.myTeam}/players`}
+                          >
+                            Players{" "}
+                            <FaAngleLeft
+                              size={12}
+                              className={style.angleIcon}
+                            />
                           </NavLink>
-                        </li>
-                        {/* Players links */}
-                        <li className={style.submenuSecondary}>
-                          <li className={style.subUserList}>
-                            <NavLink
-                              to={`${user.username}/myTeam/${user.myTeam}/players`}
-                            >
-                              Players{" "}
-                              <FaAngleLeft
-                                size={12}
-                                className={style.angleIcon}
-                              />
-                            </NavLink>
-                          </li>
-                          <ul className={style.subUserList}>
+                          <ul className={style.submenuSecondary}>
                             <li className={style.submenuSecondaryList}>
                               <NavLink
                                 to={`${user.username}/myTeam/${user.myTeam}/players/createPlayer`}
@@ -129,7 +120,6 @@ export default function Header({ user }: Props) {
                         </li>
                       </ul>
                     </li>
-
                     <li className={style.submenuList}>
                       <NavLink onClick={handleLogout} to="/">
                         Logout

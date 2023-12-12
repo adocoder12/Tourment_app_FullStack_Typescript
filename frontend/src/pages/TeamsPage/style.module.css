@@ -1,5 +1,4 @@
 .TeamsPageContainer {
   display: grid;
-  place-items: center;
-  width: 100%;
+  grid-template-columns: minmax(320px, 1fr);
 }

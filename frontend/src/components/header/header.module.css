@@ -88,7 +88,7 @@
 }
 
 /*----------- submenu ---------- */
-/*----------- submenu ---------- */
+
 .submenu,
 .submenuSecondary {
   display: none;
@@ -97,47 +97,40 @@
 }
 
 /* Styling for submenu items */
-.submenu .submenuList,
-.submenuSecondary .submenuSecondaryList {
+/* Display submenuSecondary on subUserList hover */
+.subUserList:hover .submenuSecondary {
   display: block;
-  padding: 6px 0;
+}
+/* Initial state for submenu and angleIcon */
+.submenu,
+.submenuSecondary {
+  display: none;
 }
 
-.submenusecondarylist {
-  margin-top: 10px;
-}
-/* Initial state for angleIcon */
-/* Initial state for angleIcon */
 .angleIcon {
   transform: rotate(0);
   transition: transform 0.5s ease;
 }
 
 /* Display submenu on li hover */
-.userList:hover .submenu {
+.userList:hover .submenu,
+.submenuSecondaryList:hover .submenuSecondary {
   display: block;
 }
 
 /* Rotate angleIcon on li hover */
-.userList:hover .angleIcon {
-  transform: rotate(270deg);
-}
-
-/* Display submenuSecondary on submenuSecondaryList hover */
-.subUserList:hover .angleIcon .subUserList {
-  display: block;
-}
-
-/* Rotate angleIcon on submenuSecondaryList hover */
+.userList:hover .angleIcon,
 .submenuSecondaryList:hover .angleIcon {
   transform: rotate(270deg);
 }
 
-/* Individual link styles and hover effects */
-.submenuList:hover .angleIcon {
-  transform: rotate(270deg);
+/* Display submenuSecondary on subUserList hover */
+.subUserList:hover .submenuSecondary {
+  display: block;
 }
 
+/* Individual link styles and hover effects */
+.submenuList:hover .angleIcon,
 .submenuSecondaryList:hover .angleIcon {
   transform: rotate(270deg);
 }

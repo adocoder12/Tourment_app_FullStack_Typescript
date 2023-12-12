@@ -6,10 +6,15 @@ import Avatar from "@/components/avatar/Avatar";
 import Loader from "@/components/Loader/Loader";
 
 //redux
-import { useAppSelector } from "@/redux/hooks/hooks";
+// import { useAppSelector } from "@/redux/hooks/hooks";
+//interfaces
+import { Icategory } from "@/utils/interfaces/category";
 
-export default function TeamList() {
-  const { categories } = useAppSelector((state) => state.categories);
+interface Props {
+  categories: Icategory[] | undefined;
+}
+
+export default function TeamList({ categories }: Props) {
   return (
     <>
       <div className={style.TeamsListContainer}>

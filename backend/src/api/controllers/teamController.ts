@@ -124,7 +124,6 @@ const addTeam = async (req: Request, res: Response, next: NextFunction) => {
     userId,
   } = req.body;
   const logoPath = req.file?.path;
-  console.log(userId, categoryId);
 
   const updateFields = req.body;
 

@@ -22,6 +22,7 @@ export default function CreateTeam() {
   const [phone, setPhone] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [number, setNumber] = useState<string>("");
+
   //img
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
@@ -54,7 +55,7 @@ export default function CreateTeam() {
     }
 
     const formData = new FormData();
-    formData.append("badge", selectedFile!);
+    formData.append("picture", selectedFile!);
     formData.append("name", name);
     formData.append("lastname", lastName);
     formData.append("nickname", nickname);
@@ -66,21 +67,24 @@ export default function CreateTeam() {
     formData.append("phone", phone);
     formData.append("email", email);
     formData.append("number", number);
-    formData.append("clubId", user!.myTeam!._id!);
+    formData.append("teamId", user!.myTeam!);
 
     dispatch(createPlayer(formData));
 
-    setName("");
-    setLastName("");
-    setNickname("");
-    setAge("");
-    setHeight("");
-    setWeight("");
-    setPosition("");
-    setGender("");
-    setPhone("");
-    setEmail("");
-    setNumber("");
+    if (!error) {
+      setName("");
+      setLastName("");
+      setNickname("");
+      setAge("");
+      setHeight("");
+      setWeight("");
+      setPosition("");
+      setGender("");
+      setPhone("");
+      setEmail("");
+      setNumber("");
+      setSelectedFile(null);
+    }
   };
   return (
     <>
@@ -211,15 +215,15 @@ export default function CreateTeam() {
           </div>
           <div className={style.labelWrapper}>
             {/* <Dropdown
-            setDropdownID={handleSelectTeam}
-            title="Select Team"
-            dropdownList={
-              teams?.map((team) => ({
-                id: team._id!,
-                name: team.name!,
-              })) || []
-            }
-          /> */}
+              setDropdownID={handleSelectTeam}
+              title="Select Team"
+              dropdownList={
+                teams?.map((team) => ({
+                  id: team._id!,
+                  name: team.name!,
+                })) || []
+              }
+            /> */}
             <Dropdown
               setDropdownID={handleSelectGender}
               title="Select gender"

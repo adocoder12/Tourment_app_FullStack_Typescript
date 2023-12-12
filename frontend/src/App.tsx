@@ -18,10 +18,16 @@ import MyTeamPage from "./pages/myTeamPage/MyTeamPage";
 import TeamsPage from "./pages/TeamsPage/TeamsPage";
 
 //redux
-import { useAppSelector } from "./redux/hooks/hooks";
+import { useAppSelector, useAppDispatch } from "./redux/hooks/hooks";
+import { useEffect } from "react";
+import { getTeams } from "./redux/services/team";
 
 function App() {
   const { user, token } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getTeams());
+  }, [dispatch]);
   return (
     <>
       <div className="app">

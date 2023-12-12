@@ -17,7 +17,7 @@ import { upload } from "../../multerMidleware";
 //routes
 router.get("/getPlayers", getPlayers);
 router.get("/getPlayer/:id", getPlayer);
-router.post("/createPlayer", upload.single("badge"), addPlayer);
+router.post("/createPlayer", upload.single("picture"), addPlayer);
 router.put("/updatePlayer/:id", updatePlayer);
 router.delete("/deletePlayer/:id", deletePlayer);
 

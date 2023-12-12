@@ -47,7 +47,7 @@ const TeamStandings = ({ teams }: Props) => {
                       width="50"
                       height="50"
                       src={`${team.badge}`}
-                      path={`/teams/${team.name}`}
+                      path={`/teams/${team._id}`}
                     />
                     {team.name}
                   </td>

@@ -14,7 +14,7 @@ export interface Iuser {
   username?: string;
   email?: string;
   avatar?: string;
-  myTeam?: ITeam;
+  myTeam?: string | ITeam["_id"];
   role?: string;
   createdAt?: string;
 }

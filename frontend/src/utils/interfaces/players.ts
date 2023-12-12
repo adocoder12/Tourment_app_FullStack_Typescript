@@ -21,7 +21,7 @@ export interface IPlayer {
   category?: string;
   position: Eposition | string;
   number: number;
-  clubId: ITeam | string;
+  teamId: ITeam["_id"] | string;
   previousClubs?: ITeam[] | string[];
   createdAt?: Date;
   injured?: boolean;

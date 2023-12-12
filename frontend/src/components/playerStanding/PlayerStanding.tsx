@@ -42,16 +42,11 @@ const PlayerStandings = ({ players, playerIdHandler }: Props) => {
             {players?.map((player) => (
               <tr key={player._id} onClick={() => handleSelect(player._id!)}>
                 <td className={styles.playerInfo}>
-                  {/* <img
-                    src={`player-avatar-${player.id}.png`}
-                    alt={`Player Avatar ${player.name}`}
-                    className={styles.playerAvatar}
-                  /> */}
                   <Avatar
                     alt="UserPic"
                     width="40"
                     height="40"
-                    path={`/player/${player._id}`}
+                    src={player.picture}
                   />
                   {player.name}
                 </td>

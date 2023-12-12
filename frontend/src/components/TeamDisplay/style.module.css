@@ -1,9 +1,9 @@
-.teamContainer {
-  display: grid;
-  place-items: center;
-  width: 100%;
+.teamstandings {
+  display: block;
 }
 
-.teamstandings {
-  display: flex;
+@media (min-width: 1220px) {
+  .teamstandings {
+    display: flex;
+  }
 }

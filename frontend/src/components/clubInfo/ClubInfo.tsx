@@ -12,7 +12,7 @@ interface Props {
   playerTeam?: ITeam | undefined;
   playerName?: IPlayer["name"] | undefined;
   playerCategory?: IPlayer["category"] | undefined;
-  img?: string;
+  img?: IPlayer["picture"] | undefined;
 }
 export default function ClubInfo({
   img,

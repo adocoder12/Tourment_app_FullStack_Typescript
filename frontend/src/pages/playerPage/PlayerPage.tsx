@@ -19,6 +19,8 @@ export default function PlayerPage() {
   const { team } = useAppSelector((state) => state.teams);
   const dispatch = useAppDispatch();
 
+  console.log(id);
+
   const playerIdHandler = (id: string) => {
     setPlayerId(id);
   };

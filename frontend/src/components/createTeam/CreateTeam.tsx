@@ -59,17 +59,23 @@ export default function CreateTeam() {
     formData.append("categoryId", category);
     formData.append("userId", user?.id as string);
 
-    dispatch(createTeam(formData)); // Pass newTeam object as argument
+    try {
+      dispatch(createTeam(formData));
 
-    setTeamName("");
-    setShortName("");
-    setAddress("");
-    setCity("");
-    setPhone("");
-    setEmail("");
-    setFounded("");
-    setZipCode("");
-    setCategory("");
+      // Reset state variables after successful team creation
+      setTeamName("");
+      setShortName("");
+      setAddress("");
+      setCity("");
+      setPhone("");
+      setEmail("");
+      setFounded("");
+      setZipCode("");
+      setCategory("");
+    } catch (error) {
+      // Handle errors if the team creation fails
+      console.error("Team creation failed:", error);
+    }
   };
   return (
     <>

@@ -15,14 +15,14 @@ import { useAppSelector } from "@/redux/hooks/hooks";
 
 //interfaces
 import { ITeam } from "@/utils/interfaces/team";
-
+// import { IPlayer } from "@/utils/interfaces/players";
 // interface Props {
-//   img?: string;
+//   player?: IPlayer;
+//   team?: ITeam;
 // }
 
 export default function HeroTeam() {
   const { player } = useAppSelector((state) => state.players);
-
   return (
     <section className={styles.hero}>
       <div className={styles.left}>
@@ -32,6 +32,7 @@ export default function HeroTeam() {
             alt={`Player Avatar ${player?.name}`}
             width="150"
             height="150"
+            src={player?.picture}
           />
         </div>
         <div className={styles.playerInfo}>
@@ -39,7 +40,6 @@ export default function HeroTeam() {
             {player ? player?.name + " " + player.lastname : "Player Name"}
           </h3>
           <p>{player ? player?.position : "Player position"}</p>
-
           <div className={styles.icons}>
             {/* Add football icons or any other relevant icons */}
             ⚽️ ⚽️ ⚽️
@@ -52,7 +52,7 @@ export default function HeroTeam() {
           playerName={player?.name}
           playerCategory={player?.category}
           playerStat={player?.stats}
-          playerTeam={player?.club as ITeam}
+          playerTeam={player?.teamId as ITeam}
         />
         <NextMatchCard />
       </div>

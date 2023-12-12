@@ -48,7 +48,7 @@ const createPlayer = createAsyncThunk(
       "http://localhost:8080/api/v1/players/createPlayer",
       {
         method: "POST",
-        body: JSON.stringify(formData),
+        body: formData,
       }
     );
     const data = await response.json();
