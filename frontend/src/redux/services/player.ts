@@ -43,13 +43,12 @@ const getPlayers = createAsyncThunk(
 // createPlayer
 const createPlayer = createAsyncThunk(
   "user/players/addPlayer",
-  async (newPlayer: IPlayer, { rejectWithValue }) => {
+  async (formData: FormData, { rejectWithValue }) => {
     const response = await fetch(
       "http://localhost:8080/api/v1/players/createPlayer",
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newPlayer),
+        body: JSON.stringify(formData),
       }
     );
     const data = await response.json();

@@ -26,11 +26,15 @@ a.circle {
   color: transparent;
 }
 
+.imageUploadLabel {
+  position: relative;
+}
+
 .addPicIcon {
   position: absolute;
   cursor: pointer;
-  bottom: 438px;
-  right: 451px;
+  bottom: -8px;
+  right: 5px;
   background: inherit;
   cursor: pointer;
   z-index: 99;

@@ -24,7 +24,11 @@ const errorHandler = (
     },
   });
 };
+/* ========= With Basic   and base64  ===== */
 
+// const decoded = Buffer.from(token, "base64").toString("utf8");
+// console.log("decoded: " + decoded);
+// const [username, password] = decoded.split(":");
 const authenticate = async (
   req: Request,
   res: Response,
@@ -39,19 +43,19 @@ const authenticate = async (
       const token = authorization.split(" ")[1];
 
       /* ========= With JsonWebToken  and Bearer  ===== */
-      //   const { username, password } = jwt.verify(
-      //     token,
-      //     process.env.JWT_SECRET as string
-      //   );
+      // const { username, password } = jwt.verify(
+      //   token,
+      //   process.env.JWT_SECRET as string
+      // );
 
       /* ========= With Basic   and base64  ===== */
 
       const decoded = Buffer.from(token, "base64").toString("utf8");
       console.log("decoded: " + decoded);
       const [username, password] = decoded.split(":");
-
       req.body.username = username;
       req.body.password = password;
+
       next();
     } catch (error) {
       next(new CustomError(" Request is not authorized", 401));

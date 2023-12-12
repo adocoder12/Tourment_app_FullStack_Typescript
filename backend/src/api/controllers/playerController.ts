@@ -14,7 +14,7 @@ import CustomError from "../../classes/CustomError";
 const getPlayers = async (req: Request, res: Response, next: NextFunction) => {
   console.log("getPlayers controller: ");
   try {
-    const players = await Player.find().populate("club");
+    const players = await Player.find().populate("club stats");
 
     if (!players) {
       next(new CustomError("players not found", 404));
@@ -32,13 +32,7 @@ const getPlayer = async (req: Request, res: Response, next: NextFunction) => {
   const playerId = req.params.id;
 
   try {
-    const player = await Player.findById(playerId).populate("club");
-
-    const team = await Team.findById(player?.club);
-
-    if (!team) {
-      await Player.findByIdAndUpdate(playerId, { club: null }, { new: true });
-    }
+    const player = await Player.findById(playerId).populate("club stats");
 
     if (!player) {
       next(new CustomError("Player not found", 404));
@@ -77,10 +71,20 @@ const addPlayer = async (req: Request, res: Response, next: NextFunction) => {
 
   try {
     const team: ITeam = await Team.findById(updateObject.teamId);
-    console.log("team: ", team);
-    const player_name_Exist = await Player.findOne({
+
+    const player_email_Exist = await Player.findOne({
       email: updateObject.email,
     });
+    const playerName = await Player.findOne({ name: updateObject.name });
+    const playerLastname = await Player.findOne({
+      lastname: updateObject.lastname,
+    });
+
+    if (playerName && playerLastname) {
+      next(new CustomError(`Player already exists  `, 400));
+      return;
+    }
+
     const player_number = await Player.findOne({
       number: updateObject.number,
     });
@@ -94,7 +98,7 @@ const addPlayer = async (req: Request, res: Response, next: NextFunction) => {
       next(new CustomError("Team not found", 404));
       return;
     }
-    if (player_name_Exist) {
+    if (player_email_Exist) {
       next(new CustomError(`Email in use  `, 400));
       return;
     }
@@ -107,7 +111,7 @@ const addPlayer = async (req: Request, res: Response, next: NextFunction) => {
       weight: updateObject.weight,
       phone: updateObject.phone,
       email: updateObject.email,
-      club: team,
+      club: team._id,
       number: updateObject.number,
       isCaptain: updateObject.isCaptain,
       gender: updateObject.gender,
@@ -115,23 +119,13 @@ const addPlayer = async (req: Request, res: Response, next: NextFunction) => {
       age: updateObject.age,
     });
 
-    if (team.players?.includes(player)) {
-      next(new CustomError("Player already exists in that team", 400));
-      return;
-    }
-
     // Add player to team
 
     await Team.findByIdAndUpdate(
       player.club,
       { $push: { players: player } },
       { new: true }
-    ).populate("players");
-
-    // team.players?.push(player);
-    // await team.save();
-
-    // console.log("player: ", team.players);
+    );
 
     const response: DbMessageResponse = {
       message: "Player created",
@@ -229,17 +223,12 @@ const deletePlayer = async (
     }
 
     // Remove player from team
-    const updatedTeam = await Team.findByIdAndUpdate(
+    await Team.findByIdAndUpdate(
       player.club,
       { $pull: { players: player._id } },
       { new: true }
     ).populate("players");
-    console.log("updatedTeam: ", updatedTeam);
 
-    if (!updatedTeam) {
-      next(new CustomError("Team not found", 404));
-      return;
-    }
     // Delete player
     await Player.findByIdAndDelete(player._id);
 

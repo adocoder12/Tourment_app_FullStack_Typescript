@@ -14,7 +14,6 @@ const getCategories = createAsyncThunk(
 
     if (response.ok) {
       const categories: Icategory[] = data;
-      console.log("categories", categories);
       return {
         categories: categories,
       };
@@ -62,7 +61,6 @@ const deleteCategory = createAsyncThunk(
       }
     );
     const data = await response.json();
-    console.log("data", data);
 
     if (response.ok) {
       const category: Icategory[] = data;

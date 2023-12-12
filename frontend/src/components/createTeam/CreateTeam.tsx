@@ -8,10 +8,6 @@ import { createTeam } from "@redux/services/team";
 import { getCategories } from "@/redux/services/category";
 //Componnents
 import Avatar from "../avatar/Avatar";
-
-//interfaces
-
-//component
 import Dropdown from "../dropdown/Dropdown";
 
 export default function CreateTeam() {
@@ -25,8 +21,7 @@ export default function CreateTeam() {
   const [founded, setFounded] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [previeImage, setPreviewImage] = useState<string>("");
-
+  //redux
   const dispatch = useAppDispatch();
   const { message, error } = useAppSelector((state) => state.teams);
   const { categories } = useAppSelector((state) => state.categories);
@@ -39,19 +34,8 @@ export default function CreateTeam() {
   const handleSelectCategory = (category: string) => {
     setCategory(category);
   };
-  console.log(categories);
 
-  //img uplaod
-  const handlePhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files && e.target.files[0];
-    if (!file) return;
-
-    console.log(file.size);
-
-    if (file.size >= 16777216) {
-      return alert("File size too large! Please choose a smaller file.");
-    }
-    setPreviewImage(URL.createObjectURL(file));
+  const handleSelectFile = (file: File) => {
     setSelectedFile(file);
   };
 
@@ -75,22 +59,6 @@ export default function CreateTeam() {
     formData.append("categoryId", category);
     formData.append("userId", user?.id as string);
 
-    // const newTeam = {
-    //   name: teamName + "FC",
-    //   shortName: shortName + "FC",
-    //   badge: formData,
-    //   address: address,
-    //   zipCode: zipCode,
-    //   city: city,
-    //   phone: phone,
-    //   email: email,
-    //   founded: parseInt(founded), // Convert founded to number
-    //   categoryId: category,
-    //   userId: user?.id,
-    // };
-
-    console.log(formData);
-
     dispatch(createTeam(formData)); // Pass newTeam object as argument
 
     setTeamName("");
@@ -102,7 +70,6 @@ export default function CreateTeam() {
     setFounded("");
     setZipCode("");
     setCategory("");
-    setPreviewImage("");
   };
   return (
     <>
@@ -114,9 +81,9 @@ export default function CreateTeam() {
             alt="TeamPic"
             width="80"
             height="80"
-            src={previeImage}
             addImage={true}
-            handlePhoto={handlePhoto}
+            // handlePhoto={handlePhoto}
+            handleSelectFile={handleSelectFile}
           />
         </div>
         <form

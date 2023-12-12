@@ -1,10 +1,10 @@
-import { ITeam } from "@/utils/interfaces/team";
+import { useState, useEffect, ChangeEvent } from "react";
 import avatar from "./avatar.module.css";
-import perfil from "@/assets/perfil01.png";
-//icons
 import { FaPlus } from "react-icons/fa6";
-import { useState, useEffect } from "react";
-
+//img
+import perfil from "@/assets/perfil01.png";
+//interfaces
+import { ITeam } from "@/utils/interfaces/team";
 interface Props {
   TeamLogo?: ITeam["badge"] | undefined;
   height?: string;
@@ -13,8 +13,10 @@ interface Props {
   alt?: string;
   path?: string;
   addImage?: boolean;
-  handlePhoto?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSelectFile?: (file: File) => void;
 }
+
+const MAX_FILE_SIZE = 16777216; // 16 MB
 
 export default function Avatar({
   height,
@@ -23,9 +25,24 @@ export default function Avatar({
   src,
   path,
   addImage,
-  handlePhoto,
+  handleSelectFile,
 }: Props) {
-  const [imageUrl, setImageUrl] = useState("");
+  const [previewImage, setPreviewImage] = useState<string>("");
+  const [imageUrl, setImageUrl] = useState<string>("");
+
+  //img upload
+  const handlePhoto = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    console.log(file.size);
+
+    if (file.size >= MAX_FILE_SIZE) {
+      return alert("File size too large! Please choose a smaller file.");
+    }
+    setPreviewImage(URL.createObjectURL(file));
+    handleSelectFile?.(file);
+  };
 
   useEffect(() => {
     (async () => {
@@ -43,15 +60,20 @@ export default function Avatar({
         console.error("Error fetching image:", error);
       }
     })();
-  }, [src]);
+
+    return () => {
+      URL.revokeObjectURL(imageUrl);
+    };
+  }, [src, imageUrl]);
+
   return (
     <>
-      <a href={path ? path : "#"}>
+      <a href={path}>
         <img
           className={`${avatar.avatar} `}
           height={height}
           width={width}
-          src={!imageUrl ? perfil : imageUrl}
+          src={imageUrl || previewImage || perfil}
           alt={alt}
         />
         {addImage && (

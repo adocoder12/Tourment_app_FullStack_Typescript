@@ -11,7 +11,7 @@ import CustomError from "../../classes/CustomError";
 import DbMessageResponse from "../../interfaces/DbResponse";
 import { ITeamResponse, Icategory } from "../../interfaces/team";
 
-// Get teams by category
+/*========== get Teams by category ==============*/
 
 const getTeamsByCategory = async (
   req: Request,
@@ -40,7 +40,7 @@ const getTeamsByCategory = async (
   }
 };
 
-/*========== get controller ==============*/
+/*========== get Team ==============*/
 
 const getTeams = async (req: Request, res: Response, next: NextFunction) => {
   console.log("getTeams controller: ");
@@ -56,10 +56,38 @@ const getTeams = async (req: Request, res: Response, next: NextFunction) => {
     next(new CustomError(error.message || "Get categories error", 400));
   }
 };
+/*========== get team by name ==============*/
+const getTeamByName = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  console.log("getTeamByName controller: ");
+  const { name } = req.params;
+  try {
+    const team = await Team.findOne({ name }).populate("players categoryID");
 
-/*========== get team ==============*/
+    if (!team) {
+      next(new CustomError("Team not found", 404));
+      return;
+    }
+
+    const response: DbMessageResponse = {
+      message: "Team found",
+      team: team,
+    };
+
+    res.status(200).json(response);
+  } catch (error: string | CustomError | any) {
+    next(new CustomError(error.message || "Get team error", 400));
+  }
+};
+
+/*========== get team by id ==============*/
 const getTeamById = async (req: Request, res: Response, next: NextFunction) => {
-  const id = req.params.id;
+  console.log("getTeamById controller: ");
+  const { id } = req.params;
+
   try {
     const team = await Team.findById(id).populate("players categoryID");
 
@@ -252,8 +280,12 @@ const deleteTeam = async (req: Request, res: Response, next: NextFunction) => {
 
     if (!team) {
       for (const player of players) {
-        player.club = ""; // Assuming you want to remove the association
-        await player.save();
+        await player.Update(
+          {
+            $unset: { club: team._id },
+          },
+          { new: true }
+        );
       }
       next(new CustomError("Team not found", 404));
       return;
@@ -265,6 +297,14 @@ const deleteTeam = async (req: Request, res: Response, next: NextFunction) => {
       next(new CustomError("Categorie not found", 404));
       return;
     }
+    // Update the Category to remove the team
+    await Category.findByIdAndUpdate(
+      team.categoryID,
+      {
+        $pull: { teams: team._id },
+      },
+      { new: true }
+    );
 
     // Update the owner's myTeam object
     await User.findByIdAndUpdate(
@@ -274,14 +314,6 @@ const deleteTeam = async (req: Request, res: Response, next: NextFunction) => {
       { new: true }
     );
 
-    // Update the Category to remove the team
-    await Category.findByIdAndUpdate(
-      team.categoryID,
-      {
-        $pull: { teams: team._id },
-      },
-      { new: true }
-    );
     // Delete the team
     await Team.findByIdAndDelete(team._id);
 
@@ -301,5 +333,6 @@ export {
   deleteTeam,
   updateTeam,
   getTeamById,
+  getTeamByName,
   getTeamsByCategory,
 };

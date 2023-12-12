@@ -19,6 +19,7 @@ const generateToken = (user: OutputUser) => {
       username: user.username,
       email: user.email,
       role: user.role,
+      favoriteTeams: user.favoriteTeams,
       myTeam: user.myTeam._id,
     },
     process.env.JWT_SECRET,
@@ -26,44 +27,6 @@ const generateToken = (user: OutputUser) => {
       expiresIn: "30d",
     }
   );
-};
-
-//get users
-const getUsers = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const users = await User.find().populate("favoriteTeams myTeam");
-    if (!users) {
-      next(new CustomError("Users not found", 404));
-      return;
-    }
-    res.status(200).json(users);
-  } catch (error: string | CustomError | any) {
-    next(new CustomError(error.message || "Get users error", 400));
-  }
-};
-
-// Get user by id
-const getUser = async (req: Request, res: Response, next: NextFunction) => {
-  const id = req.params.id;
-  try {
-    const user = await User.findById(id).populate("favoriteTeams myTeam");
-    if (!user) {
-      next(new CustomError("User not found", 404));
-      return;
-    }
-    const displayUser: OutputUser = {
-      id: user._id,
-      username: user.username,
-      email: user.email,
-      role: user.role,
-      myTeam: user.myTeam._id,
-      favoriteTeams: user.favoriteTeams,
-    };
-
-    res.status(200).json(displayUser);
-  } catch (error: string | CustomError | any) {
-    next(new CustomError(error.message || "Get user error", 400));
-  }
 };
 
 const register = async (req: Request, res: Response, next: NextFunction) => {
@@ -104,6 +67,8 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
       username: user.username,
       email: user.email,
       role: user.role,
+      myTeam: user.myTeam,
+      favoriteTeams: user.favoriteTeams,
       createdAt: user.createdAt,
     };
 
@@ -128,7 +93,9 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
       next(new CustomError("Missing credentials", 400));
       return;
     }
-    const user = await User.findOne({ username }).populate("myTeam").exec();
+    const user = await User.findOne({ username })
+      .populate("myTeam favoriteTeams")
+      .exec();
     console.log("user: " + user);
 
     if (!user) {
@@ -150,6 +117,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
       email: user.email,
       role: user.role,
       myTeam: user.myTeam[0]?._id,
+      favoriteTeams: user.favoriteTeams,
     };
     const token = generateToken(displayUser);
 
@@ -163,4 +131,4 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export { login, register, getUsers, getUser };
+export { login, register };

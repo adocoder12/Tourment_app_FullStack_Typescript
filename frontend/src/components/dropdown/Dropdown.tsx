@@ -19,15 +19,11 @@ export default function Dropdown({
 }: Props) {
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
-  console.log(dropdownList);
-
   const handleSelectChange = (id: string) => {
     console.log(id);
     setSelectedItem(id);
     setDropdownID(id);
   };
-
-  console.log("dropwdown" + dropdownList);
 
   return (
     <details className={style.customSelect}>

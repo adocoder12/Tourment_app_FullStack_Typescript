@@ -9,7 +9,7 @@ import {
   getTeams,
   updateTeam,
   deleteTeam,
-  getTeam,
+  getTeamById,
   getTeamByName,
 } from "@redux/services/team";
 
@@ -75,15 +75,15 @@ const teamSlice = createSlice({
         state.team = undefined;
       })
 
-      //getTeam
-      .addCase(getTeam.pending, (state) => {
+      //getTeam by id
+      .addCase(getTeamById.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getTeam.fulfilled, (state, { payload }) => {
+      .addCase(getTeamById.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.team = payload?.team as ITeam;
       })
-      .addCase(getTeam.rejected, (state, action) => {
+      .addCase(getTeamById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
         state.team = undefined;

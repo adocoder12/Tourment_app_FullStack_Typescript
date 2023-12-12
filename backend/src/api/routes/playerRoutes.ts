@@ -11,11 +11,13 @@ import {
   updatePlayer,
   deletePlayer,
 } from "../controllers/playerController";
-//routes
+//multer
+import { upload } from "../../multerMidleware";
 
+//routes
 router.get("/getPlayers", getPlayers);
 router.get("/getPlayer/:id", getPlayer);
-router.post("/createPlayer", addPlayer);
+router.post("/createPlayer", upload.single("badge"), addPlayer);
 router.put("/updatePlayer/:id", updatePlayer);
 router.delete("/deletePlayer/:id", deletePlayer);
 

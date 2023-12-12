@@ -5,16 +5,14 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const getTeamByName = createAsyncThunk(
   "user/teams/getTeamByName",
-  async (name: string, { rejectWithValue }) => {
-    if (!name) {
-      console.log("name is required");
+  async (id: string, { rejectWithValue }) => {
+    if (!id) {
       return rejectWithValue("name is required");
     }
     const response = await fetch(
-      `http://localhost:8080/api/v1/teams/getTeamByName/${name}`
+      `http://localhost:8080/api/v1/users/getUserTeams/${id}`
     );
     const data = await response.json();
-    console.log("data as", data);
 
     if (response.ok) {
       const team: ITeam = data.team;
@@ -31,18 +29,13 @@ const getTeamByName = createAsyncThunk(
 
 //get team by id
 
-const getTeam = createAsyncThunk(
+const getTeamById = createAsyncThunk(
   "user/teams/getTeam",
   async (id: string, { rejectWithValue }) => {
-    if (!id) {
-      console.log("id is required");
-      return rejectWithValue("id is required");
-    }
     const response = await fetch(
       `http://localhost:8080/api/v1/teams/getTeam/${id}`
     );
     const data = await response.json();
-    console.log("data as", data);
 
     if (response.ok) {
       const team: ITeam = data.team;
@@ -62,7 +55,6 @@ const getTeams = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     const response = await fetch("http://localhost:8080/api/v1/teams/getTeams");
     const data = await response.json();
-    console.log("data", data);
 
     if (response.ok) {
       const teams: ITeam[] = data;
@@ -70,8 +62,6 @@ const getTeams = createAsyncThunk(
       const teamData = {
         teams: teams,
       };
-      console.log("teams", teamData);
-
       return teamData;
     }
     return rejectWithValue(data.error);
@@ -86,8 +76,6 @@ const createTeam = createAsyncThunk(
       body: formData,
     });
     const data = await response.json();
-    console.log("data", data);
-
     if (response.ok) {
       return rejectWithValue(data.error.error.message);
     }
@@ -145,4 +133,11 @@ const deleteTeam = createAsyncThunk(
     return rejectWithValue(data.error.error.message);
   }
 );
-export { createTeam, getTeams, updateTeam, deleteTeam, getTeam, getTeamByName };
+export {
+  createTeam,
+  getTeams,
+  updateTeam,
+  deleteTeam,
+  getTeamById,
+  getTeamByName,
+};

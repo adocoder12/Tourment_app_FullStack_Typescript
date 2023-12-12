@@ -44,7 +44,6 @@ export default function Header({ user }: Props) {
   const handleLogout = () => {
     dispatch(logout());
   };
-  console.log(user?.myTeam);
 
   return (
     <>

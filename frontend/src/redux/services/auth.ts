@@ -63,6 +63,7 @@ const login = createAsyncThunk(
 
     if (response.ok) {
       const token = data.token;
+
       const decoded = jwtDecode(token);
       console.log("decoded", decoded);
 
