@@ -41,6 +41,7 @@ export default function Header({ user }: Props) {
   };
 
   const dispatch = useAppDispatch();
+
   const handleLogout = () => {
     dispatch(logout());
   };

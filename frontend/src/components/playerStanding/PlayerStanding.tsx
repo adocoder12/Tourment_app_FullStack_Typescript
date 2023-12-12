@@ -26,6 +26,7 @@ const PlayerStandings = ({ players, playerIdHandler }: Props) => {
     playerIdHandler(id);
     console.log(id);
   };
+
   return (
     <section className={styles.container}>
       <h2>Players</h2>
